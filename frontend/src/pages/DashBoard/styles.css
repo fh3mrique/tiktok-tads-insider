@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,500&display=swap');
+
+.container{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+   /*  background-color: aqua; */
+}
+
+.dashboard-container{
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    padding: 20px;
+}
+
+.title-dashboard{
+    letter-spacing: 2px;
+    color: #0066cc;
+    font-size: 3em;
+    margin-bottom: 30px;
+}
+
+.donut-chart-container{
+    width: 40%;
+    /* background-color: blueviolet; */
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.bar-chart-container{
+    width: 40%;
+    /* background-color: brown; */
+    text-align: center;
+    margin-right: 40px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.button-dashboard-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .button-dashboard {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #3498db;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-dashboard:hover {
+    background-color: #2980b9;
+  }
