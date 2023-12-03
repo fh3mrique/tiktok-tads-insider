@@ -1,0 +1,8 @@
+/* Estilize o form aqui */
+
+/* teste */
+.form-container{
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: lightblue;
+}
