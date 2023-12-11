@@ -3,6 +3,7 @@ package com.api.tadsinsight.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +31,9 @@ public class PesquisaController {
 	
 	@PostMapping
 	public ResponseEntity<PesquisaDTO> salvar (@RequestBody PesquisaDTO body) {
-		return null;
 		
+		PesquisaDTO dto = pesquisaFacade.salvar(body);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(dto);	
 	}
-
 }
