@@ -22,29 +22,6 @@ public class LinguagemRepository extends RepositoryTemplate<Linguagem, Long> {
 	public Class<Linguagem> getDomainClass() {
 		return Linguagem.class;
 	}
-
-	/*@Override
-	public List<Linguagem> buscarTodos() {
-		List<Linguagem> linguagens;
-	    EntityTransaction transaction = manager.getTransaction();
-
-	    try {
-	        transaction.begin();
-
-	        String jpql = "SELECT l FROM Linguagem l";
-	        TypedQuery<Linguagem> query = manager.createQuery(jpql, Linguagem.class);
-	        linguagens = query.getResultList();
-
-	        transaction.commit();
-	    } catch (Exception e) {
-	        if (transaction.isActive()) {
-	            transaction.rollback();
-	        }
-	        throw e;
-	    }
-
-	    return linguagens;
-    }*/
 	
 	@Override
 	public List<Linguagem> buscarTodos() {
@@ -59,6 +36,12 @@ public class LinguagemRepository extends RepositoryTemplate<Linguagem, Long> {
     public Optional<Linguagem> buscarPorId(Long id) {
         Linguagem linguagem = manager.find(Linguagem.class, id);
         return Optional.ofNullable(linguagem);
+    }
+    
+    // Implementação específica para Linguagem
+    @Override
+    public Linguagem criarEntidade() {
+        return new Linguagem();
     }
 
 }
