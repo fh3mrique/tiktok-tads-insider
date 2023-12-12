@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.tadsinsight.dtos.PesquisaDTO;
+import com.api.tadsinsight.dtos.PesquisaInsertDTO;
 import com.api.tadsinsight.services.PesquisaFacade;
 
 @RestController
@@ -30,9 +31,9 @@ public class PesquisaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<PesquisaDTO> salvar (@RequestBody PesquisaDTO body) {
+	public ResponseEntity<PesquisaInsertDTO> salvar (@RequestBody PesquisaInsertDTO body) {
 		
-		PesquisaDTO dto = pesquisaFacade.salvar(body);
+		PesquisaInsertDTO dto = pesquisaFacade.salvar(body);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(dto);	
 	}

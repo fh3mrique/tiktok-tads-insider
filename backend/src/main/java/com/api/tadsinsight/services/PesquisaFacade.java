@@ -5,9 +5,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.tadsinsight.dtos.PesquisaDTO;
+import com.api.tadsinsight.dtos.PesquisaInsertDTO;
+import com.api.tadsinsight.entities.Linguagem;
 import com.api.tadsinsight.entities.Pesquisa;
 import com.api.tadsinsight.repository.LinguagemRepository;
 import com.api.tadsinsight.repository.template.PesquisaRepository;
+import com.api.tadsinsight.services.EnvioEmailService.Mensagem;
 
 @Service
 public class PesquisaFacade {
@@ -15,9 +18,13 @@ public class PesquisaFacade {
 	private PesquisaRepository pesquisaRepository;
 	private LinguagemRepository linguagemRepository;
 	
-	public PesquisaFacade(PesquisaRepository pesquisaRepository, LinguagemRepository linguagemRepository) {
+	
+	private EnvioEmailService envioEmail;
+	
+	public PesquisaFacade(PesquisaRepository pesquisaRepository, LinguagemRepository linguagemRepository, EnvioEmailService envioEmail) {
 		this.pesquisaRepository = pesquisaRepository;
 		this.linguagemRepository = linguagemRepository;
+		this.envioEmail = envioEmail;
 	}
 
 	public Page<PesquisaDTO> buscarTodos(Pageable pageable){
@@ -27,16 +34,30 @@ public class PesquisaFacade {
 		return lista.map(x -> new PesquisaDTO(x));
 	}
 
-	public PesquisaDTO salvar(PesquisaDTO dto) {
-		
-		Pesquisa entidade = new Pesquisa();
-		
-		entidade.setIdade(dto.getIdade());
-		entidade.setNome(dto.getNome());
-		
-		entidade = pesquisaRepository.save(entidade);
-		
-		return new PesquisaDTO(entidade);
-	}
+	public PesquisaInsertDTO salvar(PesquisaInsertDTO dto) {
+        Pesquisa entidade = new Pesquisa();
+
+        entidade.setIdade(dto.getIdade());
+        entidade.setNome(dto.getNome());
+
+        // Busca a Linguagem pelo ID presente no DTO
+        Linguagem linguagem = dto.getLinguagemId() != null ?
+                linguagemRepository.buscarPorId(dto.getLinguagemId()).orElse(null) :
+                null;
+
+        entidade.setLinguagem(linguagem);
+
+        entidade = pesquisaRepository.save(entidade);
+
+        
+        
+        Mensagem mensagem = new Mensagem("fhemrique55@gmail.com", "pesquisa cadastrada", "b");
+        
+        envioEmail.enviar(mensagem);
+        
+        return new PesquisaInsertDTO(entidade);
+        
+       
+    }
 
 }
