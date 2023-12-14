@@ -1,13 +1,17 @@
 package com.api.tadsinsight.services;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.api.tadsinsight.dtos.PesquisaDTO;
 import com.api.tadsinsight.dtos.PesquisaInsertDTO;
 import com.api.tadsinsight.entities.Linguagem;
 import com.api.tadsinsight.entities.Pesquisa;
+import com.api.tadsinsight.exceptions.PesquisaNaoEncontradaException;
 import com.api.tadsinsight.repository.LinguagemRepository;
 import com.api.tadsinsight.repository.template.PesquisaRepository;
 import com.api.tadsinsight.services.EnvioEmailService.Mensagem;
@@ -59,5 +63,15 @@ public class PesquisaFacade {
         
        
     }
+
+	@Transactional(readOnly = true)
+	public PesquisaDTO buscarPorId(Long id) {
+		
+	    Optional<Pesquisa> obj = pesquisaRepository.findById(id);
+	    
+	    Pesquisa entidade = obj.orElseThrow(() -> new PesquisaNaoEncontradaException("O recurso de registro dessa Pesquisa não foi encontrado"));
+
+	    return new PesquisaDTO(entidade);
+	}
 
 }

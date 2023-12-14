@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,14 @@ public class PesquisaController {
 		return ResponseEntity.ok().body(pagina);
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<PesquisaDTO> buscarPorId (@PathVariable Long id){
+		
+		PesquisaDTO registro = pesquisaFacade.buscarPorId(id);
+		
+		return ResponseEntity.ok().body(registro);	
+	}
+	
 	@PostMapping
 	public ResponseEntity<PesquisaInsertDTO> salvar (@RequestBody PesquisaInsertDTO body) {
 		
@@ -37,4 +46,6 @@ public class PesquisaController {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(dto);	
 	}
+	
+	
 }
