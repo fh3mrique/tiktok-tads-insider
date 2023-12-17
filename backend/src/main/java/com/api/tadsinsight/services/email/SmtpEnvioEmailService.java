@@ -1,23 +1,24 @@
-package com.api.tadsinsight.services;
+package com.api.tadsinsight.services.email;
 
-import java.io.Console;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
+
+import com.api.tadsinsight.services.EnvioEmailService;
 
 import jakarta.mail.internet.MimeMessage;
 
-@Service
 public class SmtpEnvioEmailService implements EnvioEmailService {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
+	private static Logger LOG = LoggerFactory.getLogger(EmailMockService.class);
 	
 	@Override
 	public void enviar(Mensagem mensagem) {
+		
 		
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -31,6 +32,8 @@ public class SmtpEnvioEmailService implements EnvioEmailService {
 		catch (Exception e) {
 			System.out.println("ERRRO");
 		}
+		
+		LOG.info("EMAIL REAL ENVIADO PARA O " + mensagem.getDestinatario());
 	}
 	
 	
