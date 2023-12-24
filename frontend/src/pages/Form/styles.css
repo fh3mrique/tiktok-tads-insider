@@ -1,8 +1,52 @@
 /* Estilize o form aqui */
 
 /* teste */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,500&display=swap');
+
 .form-container{
-    min-width: 100%;
-    min-height: 100vh;
-    background-color: lightblue;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: max-content;
+   height: calc(100vh - 65px);
+   font-family: 'Bebas Neue', sans-serif;
+
+}
+
+.form-container form {
+    background-color: beige;
+    padding: 20px;
+    border: solid 2px rgba(201, 199, 199, 0.664);
+    text-align: center;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+font-family: 'Roboto Condensed', sans-serif;
+
+}
+.form-container form h2{
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.form-group{
+    margin-bottom: 20px;
+    width: 400px;
+    text-align: left;
+}
+
+.btn-submit{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #3498db;
+    transition: background-color 0.3s ease;
 }
